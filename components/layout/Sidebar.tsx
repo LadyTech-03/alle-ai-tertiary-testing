@@ -1544,12 +1544,16 @@ export function Sidebar() {
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <Avatar className="h-7 w-7 cursor-default">
-                            <AvatarImage src={organizationDetails.logo_url} alt={organizationDetails.name} />
-                            <AvatarFallback className="text-xs bg-primary/10">
-                              {organizationDetails.name?.substring(0, 2).toUpperCase()}
-                            </AvatarFallback>
-                          </Avatar>
+                          <div className="relative">
+                            <Image
+                              src={organizationDetails.logo_url || "/user.jpg"}
+                              alt={organizationDetails.name}
+                              width={32}
+                              height={32}
+                              className="h-8 w-8 rounded-full ring-1 ring-border/20 group-hover:ring-primary/40 transition-all"
+                            />
+                          </div>
+
                         </TooltipTrigger>
                         <TooltipContent side="top">{organizationDetails.name}</TooltipContent>
                       </Tooltip>
