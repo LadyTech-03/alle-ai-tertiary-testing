@@ -1,0 +1,356 @@
+{
+  "id": "org-univ-001",
+  "name": "Tech Innovation University",
+  "data": [
+    {
+      "id": "group-students-root",
+      "name": "Students Division",
+      "seatType": "Students",
+      "createdBy": "sys-admin-001",
+      "totalSeats": 2000,
+      "usedSeats": 1875,
+      "totalBatches": 15,
+      "totalMembers": 1875,
+      "type": "group",
+      "usage": 93.75,
+      "description": "Main student division overseeing all student groups and batches",
+      "createdAt": "2023-01-10T08:00:00Z",
+      "status": "active",
+      "isRoot": true,
+      "batches": [
+        {
+          "id": "batch-ug-2023",
+          "name": "Undergraduate Class 2023",
+          "createdBy": "dean-students",
+          "createdAt": "2023-01-20T09:15:00Z",
+          "status": "active",
+          "type": "group",
+          "usage": 96,
+          "seatType": "Students",
+          "description": "All undergraduate students for 2023 academic year",
+          "totalMembers": 1200,
+          "totalBatches": 8,
+          "members": [
+            {
+              "id": "member-ug-001",
+              "name": "John Anderson",
+              "email": "john.anderson@university.edu",
+              "dateAdded": "2023-01-25T10:30:00Z",
+              "usage": 88,
+              "createdBy": "dean-students",
+              "createdAt": "2023-01-25T10:30:00Z",
+              "type": "member",
+              "status": "active"
+            },
+            {
+              "id": "member-ug-002",
+              "name": "Maria Garcia",
+              "email": "maria.garcia@university.edu",
+              "dateAdded": "2023-01-26T11:45:00Z",
+              "usage": 92,
+              "createdBy": "dean-students",
+              "createdAt": "2023-01-26T11:45:00Z",
+              "type": "member",
+              "status": "active"
+            }
+          ],
+          "batches": [
+            {
+              "id": "sub-batch-cs-ug",
+              "name": "Computer Science Undergrad",
+              "createdBy": "dean-students",
+              "createdAt": "2023-02-01T14:20:00Z",
+              "status": "active",
+              "type": "group",
+              "usage": 98,
+              "seatType": "Students",
+              "description": "Computer Science undergraduate students",
+              "totalMembers": 300,
+              "totalBatches": 3,
+              "members": [
+                {
+                  "id": "member-cs-ug-001",
+                  "name": "Alex Thompson",
+                  "email": "alex.thompson@university.edu",
+                  "dateAdded": "2023-02-05T08:30:00Z",
+                  "usage": 95,
+                  "createdBy": "dean-students",
+                  "createdAt": "2023-02-05T08:30:00Z",
+                  "type": "member",
+                  "status": "active"
+                }
+              ],
+              "batches": [
+                {
+                  "id": "batch-cs-freshmen",
+                  "name": "CS Freshmen 2023",
+                  "createdBy": "cs-department",
+                  "createdAt": "2023-02-10T10:00:00Z",
+                  "status": "active",
+                  "type": "member",
+                  "usage": 99,
+                  "seatType": "Students",
+                  "description": "First year computer science students",
+                  "totalMembers": 150,
+                  "members": [
+                    {
+                      "id": "member-cs-fresh-001",
+                      "name": "Sarah Williams",
+                      "email": "sarah.williams@university.edu",
+                      "dateAdded": "2023-02-12T09:15:00Z",
+                      "usage": 87,
+                      "createdBy": "cs-department",
+                      "createdAt": "2023-02-12T09:15:00Z",
+                      "type": "member",
+                      "status": "active"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "sub-batch-eng-ug",
+              "name": "Engineering Undergrad",
+              "createdBy": "dean-students",
+              "createdAt": "2023-02-01T15:30:00Z",
+              "status": "active",
+              "type": "group",
+              "usage": 94,
+              "seatType": "Students",
+              "description": "Engineering undergraduate students",
+              "totalMembers": 450,
+              "totalBatches": 4,
+              "members": [
+                {
+                  "id": "member-eng-ug-001",
+                  "name": "Michael Brown",
+                  "email": "michael.brown@university.edu",
+                  "dateAdded": "2023-02-06T11:20:00Z",
+                  "usage": 91,
+                  "createdBy": "dean-students",
+                  "createdAt": "2023-02-06T11:20:00Z",
+                  "type": "member",
+                  "status": "active"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "batch-grad-2023",
+          "name": "Graduate Students 2023",
+          "createdBy": "dean-graduate",
+          "createdAt": "2023-01-22T10:45:00Z",
+          "status": "active",
+          "type": "group",
+          "usage": 89,
+          "seatType": "Students",
+          "description": "All graduate and PhD students",
+          "totalMembers": 675,
+          "totalBatches": 7,
+          "members": [
+            {
+              "id": "member-grad-001",
+              "name": "Dr. Lisa Chen",
+              "email": "lisa.chen@university.edu",
+              "dateAdded": "2023-01-28T13:15:00Z",
+              "usage": 85,
+              "createdBy": "dean-graduate",
+              "createdAt": "2023-01-28T13:15:00Z",
+              "type": "member",
+              "status": "active"
+            }
+          ]
+        }
+      ],
+      "members": [
+        {
+          "id": "member-student-admin",
+          "name": "Student Affairs Director",
+          "email": "student.director@university.edu",
+          "dateAdded": "2023-01-12T08:30:00Z",
+          "usage": 100,
+          "createdBy": "sys-admin-001",
+          "createdAt": "2023-01-12T08:30:00Z",
+          "type": "admin",
+          "status": "active"
+        }
+      ]
+    },
+    {
+      "id": "group-faculty-root",
+      "name": "Faculty Division",
+      "seatType": "Faculty",
+      "createdBy": "sys-admin-001",
+      "totalSeats": 500,
+      "usedSeats": 423,
+      "totalBatches": 12,
+      "totalMembers": 423,
+      "type": "group",
+      "usage": 84.6,
+      "description": "Main faculty division managing all academic staff and departments",
+      "createdAt": "2023-01-10T08:30:00Z",
+      "status": "active",
+      "isRoot": true,
+      "batches": [
+        {
+          "id": "batch-academic-faculty",
+          "name": "Academic Faculty",
+          "createdBy": "provost-office",
+          "createdAt": "2023-01-18T11:00:00Z",
+          "status": "active",
+          "type": "group",
+          "usage": 87,
+          "seatType": "Faculty",
+          "description": "All academic teaching faculty members",
+          "totalMembers": 285,
+          "totalBatches": 6,
+          "members": [
+            {
+              "id": "member-fac-001",
+              "name": "Dr. Robert Johnson",
+              "email": "robert.johnson@university.edu",
+              "dateAdded": "2023-01-22T14:20:00Z",
+              "usage": 92,
+              "createdBy": "provost-office",
+              "createdAt": "2023-01-22T14:20:00Z",
+              "type": "admin",
+              "status": "active"
+            },
+            {
+              "id": "member-fac-002",
+              "name": "Dr. Emily Wilson",
+              "email": "emily.wilson@university.edu",
+              "dateAdded": "2023-01-23T15:30:00Z",
+              "usage": 88,
+              "createdBy": "provost-office",
+              "createdAt": "2023-01-23T15:30:00Z",
+              "type": "member",
+              "status": "active"
+            }
+          ],
+          "batches": [
+            {
+              "id": "sub-batch-cs-faculty",
+              "name": "Computer Science Faculty",
+              "createdBy": "cs-chair",
+              "createdAt": "2023-02-05T09:45:00Z",
+              "status": "active",
+              "type": "group",
+              "usage": 91,
+              "seatType": "Faculty",
+              "description": "Computer Science department faculty staff",
+              "totalMembers": 45,
+              "totalBatches": 2,
+              "members": [
+                {
+                  "id": "member-cs-fac-001",
+                  "name": "Dr. Alan Turing",
+                  "email": "alan.turing@university.edu",
+                  "dateAdded": "2023-02-08T10:15:00Z",
+                  "usage": 96,
+                  "createdBy": "cs-chair",
+                  "createdAt": "2023-02-08T10:15:00Z",
+                  "type": "admin",
+                  "status": "active"
+                }
+              ],
+              "batches": [
+                {
+                  "id": "batch-cs-research",
+                  "name": "CS Research Faculty",
+                  "createdBy": "cs-chair",
+                  "createdAt": "2023-02-12T13:20:00Z",
+                  "status": "active",
+                  "type": "member",
+                  "usage": 94,
+                  "seatType": "Faculty",
+                  "description": "Computer Science research focused faculty",
+                  "totalMembers": 25,
+                  "members": [
+                    {
+                      "id": "member-cs-res-001",
+                      "name": "Dr. Grace Hopper",
+                      "email": "grace.hopper@university.edu",
+                      "dateAdded": "2023-02-14T11:30:00Z",
+                      "usage": 98,
+                      "createdBy": "cs-chair",
+                      "createdAt": "2023-02-14T11:30:00Z",
+                      "type": "member",
+                      "status": "active"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "sub-batch-eng-faculty",
+              "name": "Engineering Faculty",
+              "createdBy": "eng-dean",
+              "createdAt": "2023-02-05T11:00:00Z",
+              "status": "active",
+              "type": "group",
+              "usage": 85,
+              "seatType": "Faculty",
+              "description": "Engineering department faculty members",
+              "totalMembers": 68,
+              "totalBatches": 3,
+              "members": [
+                {
+                  "id": "member-eng-fac-001",
+                  "name": "Dr. Thomas Edison",
+                  "email": "thomas.edison@university.edu",
+                  "dateAdded": "2023-02-09T14:45:00Z",
+                  "usage": 83,
+                  "createdBy": "eng-dean",
+                  "createdAt": "2023-02-09T14:45:00Z",
+                  "type": "member",
+                  "status": "active"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "batch-research-staff",
+          "name": "Research Staff",
+          "createdBy": "research-director",
+          "createdAt": "2023-01-19T12:30:00Z",
+          "status": "active",
+          "type": "group",
+          "usage": 82,
+          "seatType": "Faculty",
+          "description": "Research faculty and laboratory staff",
+          "totalMembers": 138,
+          "totalBatches": 6,
+          "members": [
+            {
+              "id": "member-res-001",
+              "name": "Dr. Marie Curie",
+              "email": "marie.curie@university.edu",
+              "dateAdded": "2023-01-25T16:00:00Z",
+              "usage": 79,
+              "createdBy": "research-director",
+              "createdAt": "2023-01-25T16:00:00Z",
+              "type": "member",
+              "status": "active"
+            }
+          ]
+        }
+      ],
+      "members": [
+        {
+          "id": "member-faculty-admin",
+          "name": "Faculty Affairs Director",
+          "email": "faculty.director@university.edu",
+          "dateAdded": "2023-01-12T09:00:00Z",
+          "usage": 100,
+          "createdBy": "sys-admin-001",
+          "createdAt": "2023-01-12T09:00:00Z",
+          "type": "admin",
+          "status": "active"
+        }
+      ]
+    }
+  ]
+}
