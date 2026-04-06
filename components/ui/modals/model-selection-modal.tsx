@@ -77,7 +77,7 @@ interface ModalProps {
 }
 
 // type UserPlan = 'free' | 'standard' | 'plus';
-type UserPlan = 'free' | 'standard' | 'plus' | 'custom' | 'pro';
+type UserPlan = 'free' | 'standard' | 'plus' | 'custom' | 'pro' | 'edu';
 
 
 export function ModelSelectionModal({ isOpen, onClose }: ModalProps) {
@@ -103,6 +103,7 @@ export function ModelSelectionModal({ isOpen, onClose }: ModalProps) {
     
     // const userPlan = useAuthStore((state) => state.plan) as UserPlan;
     const rawUserPlan = useAuthStore((state) => state.plan) as string;
+    const isEduPlan = typeof rawUserPlan === 'string' && rawUserPlan.includes('edu');
   
     // Create a function to parse plan and check permissions
     const getPlanPermissions = useMemo(() => {
@@ -122,17 +123,17 @@ export function ModelSelectionModal({ isOpen, onClose }: ModalProps) {
       const planParts = rawUserPlan.split('_');
       
       // Set base user plan (first part of the plan name)
-      permissions.baseUserPlan = planParts[0] as UserPlan;
+      permissions.baseUserPlan = isEduPlan ? 'edu' : (planParts[0] as UserPlan);
   
         // For non-custom plans, we don't need to check content types
-        if (permissions.baseUserPlan !== 'custom' && permissions.baseUserPlan !== 'pro') {
+        if (permissions.baseUserPlan !== 'custom' && permissions.baseUserPlan !== 'pro' && permissions.baseUserPlan !== 'edu') {
           return permissions;
         }
           
         // For custom plans, check which content types are included
         // Special case for unlimited
         if (rawUserPlan === 'custom_unlimited' || 
-          rawUserPlan.includes('custom_chat_image_audio_video')) {
+          rawUserPlan.includes('custom_chat_image_audio_video') || isEduPlan) {
         permissions.contentTypes = {
           chat: true,
           image: true,
@@ -172,6 +173,7 @@ export function ModelSelectionModal({ isOpen, onClose }: ModalProps) {
       plus: 5,
       custom: 5,
       pro: 5,
+      edu: 5
     };
   
     const handleFavoriteToggle = async (e: React.MouseEvent, model: Model) => {
@@ -218,7 +220,7 @@ export function ModelSelectionModal({ isOpen, onClose }: ModalProps) {
       // For custom plans, check if the current content type is included
       // If included, use 'plus' permissions, otherwise use 'free' permissions
       const effectiveUserPlan = 
-        userPlan === 'custom' || userPlan === 'pro'
+        userPlan === 'custom' || userPlan === 'pro' || userPlan === 'edu'
           ? (getPlanPermissions.contentTypes[currentContentType] ? 'plus' : 'free')
           : userPlan;
       
