@@ -615,7 +615,8 @@ export function Sidebar() {
     typeof plan === 'string' &&
     (plan === 'standard' || plan === 'plus' || plan.includes('standard') || plan.includes('plus') || plan.includes('pro') || plan.includes('custom'));
 
-  // const isPaidPlan = plan === 'free';
+  const isEduPlan = typeof plan === 'string' && plan.includes('edu');
+  const studentOrLecturer = isEduPlan ? (plan.includes('student') ? '(STUDENT)' : plan.includes('faculty') ? '(LECTURER)' : '') : '';
 
   const planDisplayName = plan?.split('_')[0].toLowerCase()
 
@@ -1443,22 +1444,22 @@ export function Sidebar() {
                       <div className="flex items-center gap-3 cursor-pointer group">
                         <div className="relative">
                           <Image
-                            src={user?.photo_url || "/user.jpg"}
+                            src={isEduPlan ? organizationDetails.logo_url : (user?.photo_url || "/user.jpg")}
                             alt="User"
-                            width={32}
-                            height={32}
-                            className="h-8 w-8 rounded-full ring-1 ring-border/20 group-hover:ring-primary/40 transition-all"
+                            width={ isEduPlan ? 40 : 32}
+                            height={isEduPlan ? 40 : 32}
+                            className={` ${isEduPlan ? 'size-10' : 'size-8'} rounded-full ring-1 ring-border/20 group-hover:ring-primary/40 transition-all`}
                           />
                           {/* <div className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-green-500 ring-1 ring-backgroundSecondary"></div> */}
                         </div>
                         <div className="flex flex-col min-w-0">
-                          <span className="font-semibold text-sm text-foreground truncate">{user?.first_name}</span>
+                          <span className="font-semibold text-sm text-foreground truncate">{user?.first_name} {studentOrLecturer}</span>
                           <span
                             className="text-xs text-muted-foreground font-semibold rounded-md"
                           >
                             {plan ? (
-                              plan === "alle_ai_edu_student"
-                                ? organizationDetails?.organisation_plan || "Alle-AI Edu"
+                                isEduPlan
+                                ? organizationDetails.name!
                                 : plan.split('_')[0].charAt(0).toUpperCase() + plan.split('_')[0].slice(1)
                             ) : <Loader className="h-3 w-3 animate-spin" />}
                           </span>
@@ -1546,8 +1547,8 @@ export function Sidebar() {
                         <TooltipTrigger asChild>
                           <div className="relative">
                             <Image
-                              src={organizationDetails.logo_url || "/user.jpg"}
-                              alt={organizationDetails.name}
+                              src={user?.photo_url || "/user.jpg"}
+                              alt={'user image'}
                               width={32}
                               height={32}
                               className="h-8 w-8 rounded-full ring-1 ring-border/20 group-hover:ring-primary/40 transition-all"
