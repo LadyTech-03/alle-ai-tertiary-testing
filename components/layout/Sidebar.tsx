@@ -1446,14 +1446,14 @@ export function Sidebar() {
                           <Image
                             src={isEduPlan ? organizationDetails.logo_url : (user?.photo_url || "/user.jpg")}
                             alt="User"
-                            width={ isEduPlan ? 40 : 32}
-                            height={isEduPlan ? 40 : 32}
-                            className={` ${isEduPlan ? 'size-10' : 'size-8'} rounded-full ring-1 ring-border/20 group-hover:ring-primary/40 transition-all`}
+                            width={32}
+                            height={32}
+                            className={`size-8 rounded-full ring-1 ring-border/20 group-hover:ring-primary/40 transition-all`}
                           />
                           {/* <div className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-green-500 ring-1 ring-backgroundSecondary"></div> */}
                         </div>
                         <div className="flex flex-col min-w-0">
-                          <span className="font-semibold text-sm text-foreground truncate">{user?.first_name} {studentOrLecturer}</span>
+                          <span className="font-semibold text-sm text-foreground truncate">{user?.first_name} <span className="text-[10px]">({studentOrLecturer})</span></span>
                           <span
                             className="text-xs text-muted-foreground font-semibold rounded-md"
                           >

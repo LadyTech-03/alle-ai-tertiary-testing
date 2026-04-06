@@ -92,7 +92,7 @@ export function SettingsModal({ isOpen, onClose, defaultTabValue }: ModalProps) 
     const { isCompareMode } = useCompareModeStore();
     
     // Account/Profile state
-    const { user: authUser, token, plan: userPlan, setAuth } = useAuthStore();
+    const { user: authUser, token, plan: userPlan, setAuth, organizationDetails } = useAuthStore();
     const [isEditingProfile, setIsEditingProfile] = useState(false);
     const [isSubmittingProfile, setIsSubmittingProfile] = useState(false);
     const [isLoadingBillingPortal, setIsLoadingBillingPortal] = useState(false);
@@ -144,6 +144,7 @@ export function SettingsModal({ isOpen, onClose, defaultTabValue }: ModalProps) 
   
     const { personalization, setPersonalizationSetting } = useSettingsStore();
     const isFreeUser = userPlan === 'free' || !userPlan;
+    const isEduPlan = typeof userPlan === 'string' && userPlan.includes('edu');
   
     // Effect to handle summary toggle based on active models
     useEffect(() => { 
@@ -421,13 +422,14 @@ export function SettingsModal({ isOpen, onClose, defaultTabValue }: ModalProps) 
       }
       const last = parts[parts.length - 1];
       const cycle = last === 'monthly' ? 'Billed monthly' : last === 'yearly' ? 'Billed yearly' : 'forever';
-      const tierRaw = parts[0];
+      const tierRaw = isEduPlan ? 'edu' : parts[0];
       const tierMap: Record<string, string> = {
         free: 'Free',
         standard: 'Standard',
         plus: 'Plus',
         custom: 'Custom',
         pro: 'Pro',
+        edu: organizationDetails ? `${organizationDetails.organisation_plan}` : 'ALLE-AI EDU'
       };
       const tier = tierMap[tierRaw] || (tierRaw.charAt(0).toUpperCase() + tierRaw.slice(1));
       const featuresStart = 1;
@@ -670,7 +672,7 @@ export function SettingsModal({ isOpen, onClose, defaultTabValue }: ModalProps) 
                               onClick={handleCancelEdit}
                               className="h-8 px-3"
                             >
-                              <X className="h-4 w-4 mr-2" />
+                              {/* <X className="h-4 w-4 mr-2" /> */}
                               Cancel
                             </Button>
                           )}
@@ -693,7 +695,7 @@ export function SettingsModal({ isOpen, onClose, defaultTabValue }: ModalProps) 
                               </div>
                             ) : (
                               <div className="flex items-center gap-2">
-                                <Pencil className="h-4 w-4" />
+                                {/* <Pencil className="h-4 w-4" /> */}
                                 <span>Edit</span>
                               </div>
                             )}
@@ -704,63 +706,68 @@ export function SettingsModal({ isOpen, onClose, defaultTabValue }: ModalProps) 
                       {/* Profile Display/Edit */}
                       <div className="space-y-4 p-4 bg-muted/50 rounded-lg">
                         {/* Avatar Section */}
-                        <div className="flex items-center gap-4">
-                          <div className="relative group">
-                            <Avatar className="h-16 w-16 border-2 border-primary/20">
-                              <AvatarImage
-                                src={profileFormData.profilePhoto 
-                                  ? URL.createObjectURL(profileFormData.profilePhoto)
-                                  : authUser?.photo_url || "/user.jpg"}
-                                alt="Profile"
-                              />
-                              <AvatarFallback>
-                                {authUser?.first_name?.[0]}{authUser?.last_name?.[0]}
-                              </AvatarFallback>
-                            </Avatar>
-                            {isEditingProfile && (
-                              <label 
-                                htmlFor="profile-photo" 
-                                className="absolute inset-0 flex items-center justify-center bg-black/60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
-                              >
-                                <Camera className="h-5 w-5 text-white" />
-                                <input
-                                  id="profile-photo"
-                                  type="file"
-                                  className="hidden"
-                                  onChange={handleFileChange}
-                                  accept="image/jpeg,image/webp,image/jpg,image/webp,image/gif"
+                        <div className="flex items-center justify-between">
+
+                          <div className="flex items-center gap-4">
+                            <div className="relative group">
+                              <Avatar className="h-16 w-16 border-2 border-primary/20">
+                                <AvatarImage
+                                  src={profileFormData.profilePhoto 
+                                    ? URL.createObjectURL(profileFormData.profilePhoto)
+                                    : authUser?.photo_url || "/user.jpg"}
+                                  alt="Profile"
                                 />
-                              </label>
-                            )}
-                            {isEditingProfile && profileFormData.profilePhoto && (
-                              <button
-                                onClick={() => setProfileFormData(prev => ({ ...prev, profilePhoto: null }))}
-                                className="absolute -top-1 -right-1 p-1 bg-destructive rounded-full hover:bg-destructive/90 transition-colors"
-                              >
-                                <X className="h-3 w-3 text-white" />
-                              </button>
-                            )}
-                          </div>
-                          <div className="flex-1">
-                            <div className="text-sm font-medium">
-                              {isEditingProfile ? "Edit Profile" : `${authUser?.first_name} ${authUser?.last_name}`}
+                                <AvatarFallback>
+                                  {authUser?.first_name?.[0]}{authUser?.last_name?.[0]}
+                                </AvatarFallback>
+                              </Avatar>
+                              {isEditingProfile && (
+                                <label 
+                                  htmlFor="profile-photo" 
+                                  className="absolute inset-0 flex items-center justify-center bg-black/60 rounded-full opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer"
+                                >
+                                  <Camera className="h-5 w-5 text-white" />
+                                  <input
+                                    id="profile-photo"
+                                    type="file"
+                                    className="hidden"
+                                    onChange={handleFileChange}
+                                    accept="image/jpeg,image/webp,image/jpg,image/webp,image/gif"
+                                  />
+                                </label>
+                              )}
+                              {isEditingProfile && profileFormData.profilePhoto && (
+                                <button
+                                  onClick={() => setProfileFormData(prev => ({ ...prev, profilePhoto: null }))}
+                                  className="absolute -top-1 -right-1 p-1 bg-destructive rounded-full hover:bg-destructive/90 transition-colors"
+                                >
+                                  <X className="h-3 w-3 text-white" />
+                                </button>
+                              )}
                             </div>
-                            <div className="text-xs text-muted-foreground">{authUser?.email}</div>
-                            {typeof userPlan === 'string' ? (
-                              (() => {
-                                const { tier } = parsePlanDetails(userPlan);
-                                return (
-                                  <Badge variant="default" className="mt-1 text-xs">
-                                    {tier}
-                                  </Badge>
-                                );
-                              })()
-                            ) : (
-                              <Badge variant="default" className="mt-1 text-xs">
-                                Free
-                              </Badge>
-                            )}
+
+                            <div className="flex-1">
+                              <div className="text-sm font-medium">
+                                {`${authUser?.first_name} ${authUser?.last_name}`}
+                              </div>
+                              <div className="text-xs text-muted-foreground">{authUser?.email}</div>
+                            </div>
                           </div>
+
+                          {organizationDetails && (
+                            <div>
+                              <Avatar className="h-16 w-16 border-2 border-primary/20">
+                                <AvatarImage
+                                  src={ organizationDetails.logo_url}
+                                  alt="Profile"
+                                />
+                                <AvatarFallback>
+                                  {authUser?.first_name?.[0]}{authUser?.last_name?.[0]}
+                                </AvatarFallback>
+                              </Avatar>
+                            </div>
+                          )}
+                          
                         </div>
 
                         {/* Form Fields */}
