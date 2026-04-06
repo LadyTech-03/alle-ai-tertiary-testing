@@ -1453,7 +1453,7 @@ export function Sidebar() {
                           {/* <div className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-green-500 ring-1 ring-backgroundSecondary"></div> */}
                         </div>
                         <div className="flex flex-col min-w-0">
-                          <span className="font-semibold text-sm text-foreground truncate">{user?.first_name} <sup className="text-[10px]">({studentOrLecturer})</sup></span>
+                          <span className="font-semibold text-sm text-foreground truncate">{user?.first_name}</span>
                           <span
                             className="text-xs text-muted-foreground font-semibold rounded-md"
                           >
@@ -1546,13 +1546,17 @@ export function Sidebar() {
                       <Tooltip>
                         <TooltipTrigger asChild>
                           <div className="relative">
-                            <Image
+                            {/* <Image
                               src={user?.photo_url || "/user.jpg"}
                               alt={'user image'}
                               width={32}
                               height={32}
                               className="h-8 w-8 rounded-full ring-1 ring-border/20 group-hover:ring-primary/40 transition-all"
-                            />
+                            /> */}
+                            <Badge variant="default" className="text-xs font-semibold rounded-sm p-1 h-4">
+                              {studentOrLecturer}
+                            </Badge>
+
                           </div>
 
                         </TooltipTrigger>

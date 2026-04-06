@@ -754,11 +754,11 @@ export function SettingsModal({ isOpen, onClose, defaultTabValue }: ModalProps) 
                             </div>
                           </div>
 
-                          {organizationDetails && (
+                          {(organizationDetails && !isEditingProfile) && (
                             <div className="flex items-center gap-4">
                               
                               <div className="text-sm font-medium">
-                                {organizationDetails.organisation_name}
+                                {organizationDetails.name}
                               </div>
 
                               <Avatar className="h-16 w-16 border-2 border-primary/20">
@@ -863,33 +863,34 @@ export function SettingsModal({ isOpen, onClose, defaultTabValue }: ModalProps) 
                                         {tier}
                                       </div>
                                       {!organizationDetails && (
-                                        <Badge variant="default" className="text-xs font-semibold rounded-sm p-1 h-4">
-                                          {cycle}
-                                        </Badge>
-
+                                        <>
+                                          <Badge variant="default" className="text-xs font-semibold rounded-sm p-1 h-4">
+                                            {cycle}
+                                          </Badge>
+                                          {features.length > 0 && (
+                                            <div className="flex flex-wrap gap-1.5 mb-3">
+                                              {features.slice(0, 3).map((f, idx) => (
+                                                <Badge
+                                                  key={idx}
+                                                  variant="default"
+                                                  className="h-5 px-2 py-0 text-xs leading-none rounded-full"
+                                                >
+                                                  {f}
+                                                </Badge>
+                                              ))}
+                                              {features.length > 3 && (
+                                                <Badge
+                                                  variant="default"
+                                                  className="h-5 px-1.5 py-0 text-xs leading-none rounded-full"
+                                                >
+                                                  +{features.length - 3}
+                                                </Badge>
+                                              )}
+                                            </div>
+                                          )}
+                                        </>
                                       )}
                                     </div>
-                                    {features.length > 0 && (
-                                      <div className="flex flex-wrap gap-1.5 mb-3">
-                                        {features.slice(0, 3).map((f, idx) => (
-                                          <Badge
-                                            key={idx}
-                                            variant="default"
-                                            className="h-5 px-2 py-0 text-xs leading-none rounded-full"
-                                          >
-                                            {f}
-                                          </Badge>
-                                        ))}
-                                        {features.length > 3 && (
-                                          <Badge
-                                            variant="default"
-                                            className="h-5 px-1.5 py-0 text-xs leading-none rounded-full"
-                                          >
-                                            +{features.length - 3}
-                                          </Badge>
-                                        )}
-                                      </div>
-                                    )}
                                   </>
                                 );
                               })()
@@ -900,20 +901,23 @@ export function SettingsModal({ isOpen, onClose, defaultTabValue }: ModalProps) 
                             </div>
                             )}
                           </div>
-                          <Button 
-                            className="text-xs" 
-                            variant="outline" 
-                            onClick={() => {
-                              if (isPaidPlan) {
-                                router.push('/manage-subscription');
-                              } else {
-                                setPlansModalOpen(true);
-                              }
-                            }}
-                            disabled={isLoadingBillingPortal}
-                          >
-                            {isPaidPlan ? "MANAGE" : "UPGRADE"}
-                          </Button>
+                          {!isEduPlan && (
+                            <Button 
+                              className="text-xs" 
+                              variant="outline" 
+                              onClick={() => {
+                                if (isPaidPlan) {
+                                  router.push('/manage-subscription');
+                                } else {
+                                  setPlansModalOpen(true);
+                                }
+                              }}
+                              disabled={isLoadingBillingPortal}
+                            >
+                              {isPaidPlan ? "MANAGE" : "UPGRADE"}
+                            </Button>
+
+                          )}
                         </div>
                       </div>
                     </div>
