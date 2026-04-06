@@ -755,7 +755,12 @@ export function SettingsModal({ isOpen, onClose, defaultTabValue }: ModalProps) 
                           </div>
 
                           {organizationDetails && (
-                            <div>
+                            <div className="flex items-center gap-4">
+                              
+                              <div className="text-sm font-medium">
+                                {organizationDetails.organisation_name}
+                              </div>
+
                               <Avatar className="h-16 w-16 border-2 border-primary/20">
                                 <AvatarImage
                                   src={ organizationDetails.logo_url}

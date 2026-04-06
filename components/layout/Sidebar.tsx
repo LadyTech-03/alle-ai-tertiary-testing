@@ -616,7 +616,7 @@ export function Sidebar() {
     (plan === 'standard' || plan === 'plus' || plan.includes('standard') || plan.includes('plus') || plan.includes('pro') || plan.includes('custom'));
 
   const isEduPlan = typeof plan === 'string' && plan.includes('edu');
-  const studentOrLecturer = isEduPlan ? (plan.includes('student') ? '(STUDENT)' : plan.includes('faculty') ? '(LECTURER)' : '') : '';
+  const studentOrLecturer = isEduPlan ? (plan.includes('student') ? 'STUDENT' : plan.includes('faculty') ? 'LECTURER' : '') : '';
 
   const planDisplayName = plan?.split('_')[0].toLowerCase()
 
@@ -1453,7 +1453,7 @@ export function Sidebar() {
                           {/* <div className="absolute bottom-0 right-0 h-2 w-2 rounded-full bg-green-500 ring-1 ring-backgroundSecondary"></div> */}
                         </div>
                         <div className="flex flex-col min-w-0">
-                          <span className="font-semibold text-sm text-foreground truncate">{user?.first_name} <span className="text-[10px]">({studentOrLecturer})</span></span>
+                          <span className="font-semibold text-sm text-foreground truncate">{user?.first_name} <sup className="text-[10px]">({studentOrLecturer})</sup></span>
                           <span
                             className="text-xs text-muted-foreground font-semibold rounded-md"
                           >
