@@ -857,13 +857,17 @@ export function SettingsModal({ isOpen, onClose, defaultTabValue }: ModalProps) 
                                         tier === "Free" && "text-foreground",
                                         tier === "Standard" && "bg-gradient-to-r from-gray-300 via-gray-500 to-gray-200 dark:from-gray-100 dark:via-gray-400 dark:to-gray-200 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient",
                                         tier === "Plus" && "bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient",
-                                        tier === "Pro" || tier === "Custom" && "bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient"
+                                        tier === (organizationDetails?.organisation_plan ?? 'ALLE-AI EDU') && "bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient",
+                                        (tier === "Pro" || tier === "Custom") && "bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-[length:200%_200%] bg-clip-text text-transparent animate-gradient"
                                     )}>
                                         {tier}
                                       </div>
-                                      <Badge variant="default" className="text-xs font-semibold rounded-sm p-1 h-4">
-                                        {cycle}
-                                      </Badge>
+                                      {!organizationDetails && (
+                                        <Badge variant="default" className="text-xs font-semibold rounded-sm p-1 h-4">
+                                          {cycle}
+                                        </Badge>
+
+                                      )}
                                     </div>
                                     {features.length > 0 && (
                                       <div className="flex flex-wrap gap-1.5 mb-3">
