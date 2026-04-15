@@ -1553,7 +1553,33 @@ export function Sidebar() {
                               height={32}
                               className="h-8 w-8 rounded-full ring-1 ring-border/20 group-hover:ring-primary/40 transition-all"
                             /> */}
-                            <Badge variant="default" className="text-xs font-semibold rounded-sm p-1 h-4">
+                            <Badge 
+                              // variant="default" 
+                              className={cn(
+                                "relative inline-flex items-center justify-center",
+                                "px-3 py-1 h-auto rounded-md",
+                                "text-xs font-medium text-slate-800 dark:text-white",
+                                "transition-all duration-300 ease-out",
+                                "transform hover:scale-105 active:scale-95",
+                                "shadow-lg hover:shadow-xl",
+                                "overflow-hidden cursor-pointer",
+
+                                // Premium gradient background - adaptive for light/dark mode
+                                "bg-gradient-to-r from-blue-200 via-purple-200 to-pink-200",
+                                "dark:bg-gradient-to-r dark:from-blue-600 dark:via-purple-600 dark:to-pink-600",
+                                "bg-[length:200%_200%]",
+                                "animate-gradient",
+
+                                // Shiny overlay effect
+                                "before:absolute before:inset-0",
+                                "before:bg-gradient-to-r before:from-transparent before:via-white/20 before:to-transparent",
+                                "dark:before:bg-gradient-to-r dark:before:from-transparent dark:before:via-white/30 dark:before:to-transparent",
+                                "before:translate-x-[-100%] before:transition-transform before:duration-700",
+                                "hover:before:translate-x-[100%]",
+
+                                "relative z-10"
+                              )}
+                            >
                               {studentOrLecturer}
                             </Badge>
 

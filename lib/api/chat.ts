@@ -256,7 +256,7 @@ export const chatApi = {
       if (project_uuid) formData.append('project_uuid', project_uuid);
 
       const response = await api.post('/files', formData);
-      // console.log('response from upload file', response)  
+      console.log('Response for file upload', response)  
       return response.data;
     } catch (error) {
       throw error;
@@ -267,6 +267,7 @@ export const chatApi = {
   removeFile: async (fileUuid: string): Promise<any> => {
     try {
       const response = await api.delete(`/files/${fileUuid}`);
+      console.log('Response for delete uploaded file', response)
       return response.data;
     } catch (error) {
       throw error;
@@ -283,7 +284,7 @@ export const chatApi = {
         combine,
         compare
       });
-      // console.log('Response from createConversation:', response);
+      console.log('Response for creating a conversation (Image/Audio/Video):', response);
       return response.data;
     } catch (error) {
       // toast.error('Something went wrong', {
@@ -306,7 +307,7 @@ export const chatApi = {
     file_uuids?: string[]
   ): Promise<CreateNewConversationResponse> => {
     try {
-      // console.log('creating new conversation  with uploaded file uuids: ', file_uuids)
+      console.log('Creating new conversation  with uploaded file uuids: ', file_uuids)
       const uploadedFiles = options?.input_content?.uploaded_files || [];
       const hasFileObject = uploadedFiles.some(
         file => typeof file.file_content === 'object' && file.file_content !== null &&
@@ -348,6 +349,7 @@ export const chatApi = {
         // console.log('formData', formData)
 
         const response = await api.post<CreateNewConversationResponse>('/create/first-prompt', formData);
+        console.log('Response for creating first conversation with uploaded file/files (first-prompt) - Only Chat & Projects:', response);
         return response.data;
       } else {
         // No files, send as JSON
@@ -363,6 +365,7 @@ export const chatApi = {
           ...(file_uuids && file_uuids.length > 0 ? { file_uuids } : {}),
           ...(options?.input_content && { input_content: options.input_content })
         });
+        console.log('Response for creating first conversation WITHOUT uploaded file/files (first-prompt) - Only Chat & Projects:', response);
         return response.data;
       }
     } catch (error) {
@@ -444,7 +447,7 @@ export const chatApi = {
         // Send as multipart/form-data (Content-Type will be set by axios interceptor)
         const response = await api.post<CreatePromptResponse>('/create/prompt', formData);
 
-        // console.log(response, 'prompt response');
+        console.log('Response for created prompt with a file content attached (text/image)', response);
         
         return response.data;
       } else {
@@ -460,7 +463,7 @@ export const chatApi = {
           ...(file_uuids && file_uuids.length > 0 ? { file_uuids } : {}),
           ...(options?.input_content && { input_content: options.input_content })
         });
-        // console.log('promptResponse', response);
+          console.log('Response for created prompt WITHOUT a file content attached (text/image)', response);
         return response.data;
       }
     } catch (error) {
@@ -479,7 +482,7 @@ export const chatApi = {
         model_instance: model_uid,
         active: active
       });
-      // console.log('Response from toggleModelInstance:', response.data);
+      console.log('Response from toggleModelInstance:', response.data);
       // Return the response data directly since we just need to know if it was successful
       return {
         status: response.data.status,
@@ -493,7 +496,7 @@ export const chatApi = {
   },
 
   generateResponse: async (params: GenerateResponseParams): Promise<GenerateResponseResult> => {
-    // console.log('Generating response with params:', params);
+    console.log('Generating response with params:', {'model': params.model, 'is_new': params.is_new, 'prompt': params.prompt, 'prev': params.prev });
     try {
       const response = await api.post('/ai-response', {
         conversation: params.conversation,
@@ -502,7 +505,7 @@ export const chatApi = {
         prompt: params.prompt,
         prev: params.prev
       });
-      // console.log('Response from generateResponse:', response);
+      console.log('Response from generateResponse:', response);
       return response.data;
     } catch (error: any) {
       // toast.error(error.response.data.error || error.response.data.message || 'Failed to generate response')
@@ -512,13 +515,13 @@ export const chatApi = {
   },
 
   updateLikeState: async (responseId: string, state: LikeState): Promise<LikeStateResponse> => {
-    // console.log('Updating like state for response:', responseId, 'to state:', state);
+    console.log('Updating like state for response:', {'responseId': responseId}, 'to state:', state);
     try {
       const response = await api.post<LikeStateResponse>('/like-state', {
         response: responseId,
         state: state
       });
-      // console.log('Response from updateLikeState:', response.data);
+      console.log('Response from updateLikeState:', response.data);
       return response.data;
     } catch (error: any) {
       // toast.error(error.response.data.error || error.response.data.message || 'Something went wrong')
@@ -528,7 +531,7 @@ export const chatApi = {
   },
 
   webSearch: async (params: WebSearchParams): Promise<any> => {
-    // console.log('web search prompt id', params.prompt_id);
+    console.log('web search prompt id', params.prompt_id);
     // console.log('Messages', params.messages);
     try {
       const response = await api.post('/web-search', {
@@ -537,7 +540,7 @@ export const chatApi = {
         // follow_up: params.follow_up,
         messages: params.messages
       });
-      // console.log('Web search response:', response.data);
+      console.log('Web search response:', response.data);
       return response.data;
     } catch (error: any) {
       // toast.error(error.response.data.error || error.response.data.message || 'Error searching the web')
@@ -547,13 +550,13 @@ export const chatApi = {
   },
 
   getCombination: async ({ promptId, modelResponsePairs }: GetCombinationParams): Promise<CombinationResponse> => {
-    // console.log('Getting combination with params:', promptId, modelResponsePairs);
+    console.log('Getting combination with params:', {'promptId' : promptId, 'modelResponsePairs' : modelResponsePairs});
     try {
       const response = await api.post('/combine', {
         prompt: promptId,
         responses: modelResponsePairs
       });
-      // console.log('Combination response:', response.data);
+      console.log('Combination response:', response.data);
       return response.data;
     } catch (error: any) {
       // toast.error(error.response.data.error || error.response.data.message || 'Failed to generate Combined Response')
@@ -563,13 +566,14 @@ export const chatApi = {
   },
 
   getSummary: async ({ messageId, modelResponsePairs }: GetSummaryParams): Promise<SummaryResponse> => {
+    console.log('Getting summary with params:', {'messageId' : modelResponsePairs});
     // console.log('Getting summary with params:', messageId, modelResponsePairs);
     try {
       const response = await api.post('/compare', {
         prompt: messageId,
         responses: modelResponsePairs
       });
-      // console.log('Combination response:', response.data);
+      console.log('Combination response:', response.data);
       return response.data;
     } catch (error: any) {
       // toast.error(error.response.data.error || error.response.data.message || 'Failed to generate Compared Response')
@@ -581,7 +585,7 @@ export const chatApi = {
   getConversationContent: async (conversationType: 'chat' | 'image' | 'audio' | 'video', conversationId: string): Promise<LoadedImageResponse[]> => {
     try {
       const response = await api.get(`/conversations/${conversationType}/${conversationId}`);
-      // console.log(response, 'this is the response')
+      console.log('Response for getting conversation contentr', response)
       return response.data;
     } catch (error: any) {
       // toast.error(error.response.data.error || error.response.data.message || 'Failed to load conversation')
