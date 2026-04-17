@@ -115,6 +115,7 @@ const PromptDisplay = ({ text, maxLength }: { text: string; maxLength: number })
 
 const ImageArea = () => {
   const { content, setContent } = useContentStore();
+  const initialPrompt = content.image.input;
   const { selectedModels, inactiveModels, setTempSelectedModels, saveSelectedModels, setLoadingLatest } = useSelectedModelsStore();
   const { conversationId, promptId, generationType, setConversationId } = useConversationStore();
   const { imageModels } = useModelsStore();
@@ -223,6 +224,7 @@ const ImageArea = () => {
     const handleInitialResponse = async () => {
       if (!conversationId || !promptId) return;
       if(!isAuthenticated) return;
+      setSharedPrompt(initialPrompt)
 
       setConversationModels(selectedModels.image);
       setPreviousSelectedModels(selectedModels.image);
@@ -237,7 +239,6 @@ const ImageArea = () => {
       setGeneratedImages([]);
       setErrors({});
 
-      console.log('About to start image generation for models:', activeModels);
       
       activeModels.forEach(modelId => {
         generateImage(modelId);
@@ -751,13 +752,9 @@ const handleDownload = async (imageUrl: string, modelName: string) => {
                 const isLoading = loadingModels.includes(modelId);
                 const error = errors[modelId];
                 const modelInfo = getModelInfo(modelId);
-                // console.log(selectedModels.image, 'the image selected models');
-                // console.log(generationType, 'This is the generation type');
-                // console.log(isLoading, 'This is isLoading');
-                // console.log(loadingModels, 'This is the loading models');
 
                 if (isLoading) {
-                  // console.log('isLoading Images', isLoading);
+                  console.log('isLoading Images', isLoading);
                   return <ImageSkeleton key={modelId} modelId={modelId} />;
                 }
 
