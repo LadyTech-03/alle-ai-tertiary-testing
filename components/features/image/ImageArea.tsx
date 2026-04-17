@@ -115,7 +115,7 @@ const PromptDisplay = ({ text, maxLength }: { text: string; maxLength: number })
 
 const ImageArea = () => {
   const { content, setContent } = useContentStore();
-  const initialPrompt = content.image.input;
+  const initialPrompt = content.image.input
   const { selectedModels, inactiveModels, setTempSelectedModels, saveSelectedModels, setLoadingLatest } = useSelectedModelsStore();
   const { conversationId, promptId, generationType, setConversationId } = useConversationStore();
   const { imageModels } = useModelsStore();
@@ -186,6 +186,7 @@ const ImageArea = () => {
     const generateImage = async (modelId: string) => {
       if (!conversationId || !promptId) return;
       if(!isAuthenticated) return;
+      setSharedPrompt(initialPrompt)
       
       try {
         const response = await chatApi.generateResponse({
@@ -199,8 +200,8 @@ const ImageArea = () => {
           // Add the new image as soon as it's generated
           setGeneratedImages(prev => [...prev, {
             modelId: response.data.model_uid,
-            // imageUrl: response.data.response,
-            imageUrl: `/api/watermark?imageUrl=${encodeURIComponent(response.data.response)}`,
+            imageUrl: response.data.response,
+            // imageUrl: `/api/watermark?imageUrl=${encodeURIComponent(response.data.response)}`,
             originalImageUrl: response.data.response,
             liked: null,
             id: response.data.id
@@ -224,7 +225,6 @@ const ImageArea = () => {
     const handleInitialResponse = async () => {
       if (!conversationId || !promptId) return;
       if(!isAuthenticated) return;
-      setSharedPrompt(initialPrompt)
 
       setConversationModels(selectedModels.image);
       setPreviousSelectedModels(selectedModels.image);
@@ -239,6 +239,7 @@ const ImageArea = () => {
       setGeneratedImages([]);
       setErrors({});
 
+      // console.log('About to start image generation for models:', activeModels);
       
       activeModels.forEach(modelId => {
         generateImage(modelId);
@@ -317,8 +318,8 @@ const ImageArea = () => {
     LoadedConversationContent.forEach((promptData: any) => {
       const loadedImages: GeneratedImage[] = promptData.responses.map((resp: ImageResponse) => ({
         modelId: resp.model.uid,
-        // imageUrl: resp.body,
-        imageUrl: `/api/watermark?imageUrl=${encodeURIComponent(resp.body)}`,
+        imageUrl: resp.body,
+        // imageUrl: `/api/watermark?imageUrl=${encodeURIComponent(resp.body)}`,
         originalImageUrl: resp.body,
         liked: resp.liked === true ? true : resp.liked === false ? false : null,
         id: Number(resp.id)
@@ -561,12 +562,12 @@ const handleDownload = async (imageUrl: string, modelName: string) => {
 
   try {
     // Fetch image data
-    // const response = await fetch(imageUrl, { mode: "cors" });
-    const response = await fetch("/api/watermark/download", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ imageUrl, modelName }),
-    });
+    const response = await fetch(imageUrl, { mode: "cors" });
+    // const response = await fetch("/api/watermark/download", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ imageUrl, modelName }),
+    // });
     const blob = await response.blob();
 
     const filename = imageUrl.split('/').pop() || `Alle-AI-${modelName}-generated-image.png`;
@@ -630,8 +631,8 @@ const handleDownload = async (imageUrl: string, modelName: string) => {
       if (response.status && response.data) {
         setGeneratedImages(prev => [...prev, {
           modelId: response.data.model_uid,
-          // imageUrl: response.data.response,
-          imageUrl: `/api/watermark?imageUrl=${encodeURIComponent(response.data.response)}`,
+          imageUrl: response.data.response,
+          // imageUrl: `/api/watermark?imageUrl=${encodeURIComponent(response.data.response)}`,
           originalImageUrl: response.data.response,
           liked: null,
           id: response.data.id
@@ -752,9 +753,13 @@ const handleDownload = async (imageUrl: string, modelName: string) => {
                 const isLoading = loadingModels.includes(modelId);
                 const error = errors[modelId];
                 const modelInfo = getModelInfo(modelId);
+                // console.log(selectedModels.image, 'the image selected models');
+                // console.log(generationType, 'This is the generation type');
+                // console.log(isLoading, 'This is isLoading');
+                // console.log(loadingModels, 'This is the loading models');
 
                 if (isLoading) {
-                  console.log('isLoading Images', isLoading);
+                  // console.log('isLoading Images', isLoading);
                   return <ImageSkeleton key={modelId} modelId={modelId} />;
                 }
 
