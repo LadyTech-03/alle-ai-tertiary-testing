@@ -35,7 +35,52 @@ interface SelectedImage {
   liked?: boolean;
 }
 
-const RetryImageGeneration = ({ modelInfo, onRetry, isRetrying }: { 
+type ModelInfo = { name: string; icon: string; provider: string; type: string } | null;
+
+const ImageSkeleton = ({ modelId, modelInfo }: { modelId: string; modelInfo: ModelInfo }) => {
+  return (
+    <div className="relative w-80 h-80 lg:w-96 lg:h-96">
+      <div className="absolute top-4 left-4 z-10 flex items-center gap-2 bg-black/5 p-2 rounded-lg">
+        {modelInfo ? (
+          <>
+            <Image
+              src={modelInfo.icon ? modelInfo.icon : '/images/images/default.webp'}
+              alt={modelInfo.name}
+              width={32}
+              height={32}
+              className="w-6 h-6 rounded-full"
+            />
+            <span className="text-white text-sm font-medium">
+              {modelInfo.name}
+            </span>
+          </>
+        ) : (
+          <>
+            <AntdSkeleton.Avatar active size="small" className="w-6 h-6" />
+            <AntdSkeleton.Button active size="small" className="!w-24 !min-w-0" />
+          </>
+        )}
+      </div>
+
+      <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-lg bg-zinc-700 animate-pulse" />
+
+      <div className="absolute bottom-0 left-0 right-0 p-4">
+        <div className="flex justify-end gap-3">
+          {[1, 2, 3].map((i) => (
+            <AntdSkeleton.Button
+              key={`${modelId}-btn-${i}`}
+              active
+              size="small"
+              className="!w-9 !h-9 !min-w-0 !rounded-full"
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const RetryImageGeneration = ({ modelInfo, onRetry, isRetrying }: {
   modelInfo: { name: string; icon: string; }; 
   onRetry: () => void;
   isRetrying?: boolean; 
@@ -659,52 +704,6 @@ const handleDownload = async (imageUrl: string, modelName: string) => {
     }
   };
 
-  const ImageSkeleton = ({ modelId }: { modelId: string }) => {
-    const modelInfo = getModelInfo(modelId);
-    console.log('modelInfo', modelInfo);
-    console.log('modelId in skeleton', modelId);
-
-    return (
-      <div className="relative w-80 h-80 lg:w-96 lg:h-96">
-        <div className="absolute top-4 left-4 z-10 flex items-center gap-2 bg-black/5 p-2 rounded-lg">
-          {modelInfo ? (
-            <>
-              <Image 
-                src={modelInfo.icon ? modelInfo.icon : '/images/images/default.webp'} 
-                alt={modelInfo.name} 
-                width={32}
-                height={32}
-                className="w-6 h-6 rounded-full"
-              />
-              <span className="text-white text-sm font-medium">
-                {modelInfo.name}
-              </span>
-            </>
-          ) : (
-            <>
-              <AntdSkeleton.Avatar active size="small" className="w-6 h-6" />
-              <AntdSkeleton.Button active size="small" className="!w-24 !min-w-0" />
-            </>
-          )}
-        </div>
-
-        <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-lg bg-zinc-700 animate-pulse" />
-
-        <div className="absolute bottom-0 left-0 right-0 p-4">
-          <div className="flex justify-end gap-3">
-            {[1, 2, 3].map((i) => (
-              <AntdSkeleton.Button 
-                key={`${modelId}-btn-${i}`}
-                active 
-                size="small" 
-                className="!w-9 !h-9 !min-w-0 !rounded-full"
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  };
 
   return (
     <div className="flex justify-center p-4">
@@ -757,7 +756,7 @@ const handleDownload = async (imageUrl: string, modelName: string) => {
 
                 if (isLoading) {
                   console.log('isLoading Images', isLoading);
-                  return <ImageSkeleton key={modelId} modelId={modelId} />;
+                  return <ImageSkeleton key={modelId} modelId={modelId} modelInfo={modelInfo} />;
                 }
 
                 if (error) {
