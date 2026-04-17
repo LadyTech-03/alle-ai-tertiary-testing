@@ -305,11 +305,11 @@ const ImageArea = () => {
       }
     };
 
-    if (generationType === 'new') {
+    // if (generationType === 'new') {
       handleInitialResponse();
-    } else if(generationType === 'load' || currentGenerationType === 'share'){
-      loadConversation();
-    }
+    // } else if(generationType === 'load' || currentGenerationType === 'share'){
+      // loadConversation();
+    // }
   }, []);
 
   const handleLoadConversation = (loadedConversation: any[] | any) => {
@@ -759,7 +759,7 @@ const handleDownload = async (imageUrl: string, modelName: string) => {
                 // console.log(loadingModels, 'This is the loading models');
 
                 if (isLoading) {
-                  // console.log('isLoading Images', isLoading);
+                  console.log('isLoading Images', isLoading);
                   return <ImageSkeleton key={modelId} modelId={modelId} />;
                 }
 
