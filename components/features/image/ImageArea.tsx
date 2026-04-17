@@ -858,6 +858,7 @@ const handleDownload = async (imageUrl: string, modelName: string) => {
             // For loaded conversations, render all images directly
             generatedImages.map((image) => {
               const modelInfo = getModelInfo(image.modelId);
+              console.log('weve jumped here')
               
               return (
                 <div key={image.id} className="relative group">
