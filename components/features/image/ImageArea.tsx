@@ -305,11 +305,11 @@ const ImageArea = () => {
       }
     };
 
-    // if (generationType === 'new') {
+    if (generationType === 'new') {
       handleInitialResponse();
-    // } else if(generationType === 'load' || currentGenerationType === 'share'){
-      // loadConversation();
-    // }
+    } else if(generationType === 'load' || currentGenerationType === 'share'){
+      loadConversation();
+    }
   }, []);
 
   const handleLoadConversation = (loadedConversation: any[] | any) => {
@@ -736,8 +736,6 @@ const handleDownload = async (imageUrl: string, modelName: string) => {
         {isLoadingConversation && (
           <div className="flex justify-center items-center min-h-[200px]">
             <div className="flex flex-col items-center gap-4">
-              {/* <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div> */}
-              {/* <p className="text-sm text-muted-foreground">Loading content...</p> */}
               <Loader className="h-4 w-4 animate-spin" />
             </div>
           </div>
@@ -753,10 +751,10 @@ const handleDownload = async (imageUrl: string, modelName: string) => {
                 const isLoading = loadingModels.includes(modelId);
                 const error = errors[modelId];
                 const modelInfo = getModelInfo(modelId);
-                // console.log(selectedModels.image, 'the image selected models');
-                // console.log(generationType, 'This is the generation type');
-                // console.log(isLoading, 'This is isLoading');
-                // console.log(loadingModels, 'This is the loading models');
+                console.log(selectedModels.image, 'the image selected models');
+                console.log(generationType, 'This is the generation type');
+                console.log(isLoading, 'This is isLoading');
+                console.log(loadingModels, 'This is the loading models');
 
                 if (isLoading) {
                   console.log('isLoading Images', isLoading);
