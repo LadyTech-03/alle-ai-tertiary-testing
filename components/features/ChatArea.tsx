@@ -348,9 +348,9 @@ const thinkingModels = ['deepseek-r1', 'o1', 'o3-mini', 'gemini-2-5-pro', 'grok-
   // Update the effect to handle initial responses
   useEffect(() => {
     const handleInitialResponse = async () => {
-      console.log('I am here and this is my main function');
-      console.log(conversationId, 'conversation id');
-      console.log(promptId, 'prompt id');
+      // console.log('I am here and this is my main function');
+      // console.log(conversationId, 'conversation id');
+      // console.log(promptId, 'prompt id');
       if (!conversationId || !promptId) {
         toast.error('No conversation found');
         // console.log('No conversation or prompt id found');
@@ -635,7 +635,7 @@ const thinkingModels = ['deepseek-r1', 'o1', 'o3-mini', 'gemini-2-5-pro', 'grok-
         return;
       }
 
-      console.log('Loading conversation:', loadConversationId, 'from route:', isProjectRoute ? 'project' : 'regular');
+      // console.log('Loading conversation:', loadConversationId, 'from route:', isProjectRoute ? 'project' : 'regular');
       setConversationId(loadConversationId);     
       setIsLoadingConversation(true);
       if(isAuthenticated){
@@ -884,12 +884,12 @@ const thinkingModels = ['deepseek-r1', 'o1', 'o3-mini', 'gemini-2-5-pro', 'grok-
     const LoadedConversationContent = loadedConversation.content ?? loadedConversation; 
     // Filter out messages that have empty responses array
 
-    console.log(LoadedConversationContent, 'The loaded conversation content');
+    // console.log(LoadedConversationContent, 'The loaded conversation content');
     const messagesWithResponses = LoadedConversationContent.filter((message: any) => 
       message.responses && Array.isArray(message.responses) && message.responses.length > 0
     );
 
-    console.log('messagesWithResponses', messagesWithResponses)
+    // console.log('messagesWithResponses', messagesWithResponses)
     
     // If no messages have responses, handle empty conversation
     if (messagesWithResponses.length === 0) {

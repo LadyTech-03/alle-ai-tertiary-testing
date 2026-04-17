@@ -108,6 +108,16 @@ export function LoginForm({
       {/* Google Sign In */}
       <GoogleButton />
 
+      {/* Organization Login */}
+      <Button
+        variant="outline"
+        onClick={onSwitchToOrgLogin}
+        className="w-full flex items-center justify-center gap-2 border rounded-md py-2 px-4 transition-colors"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="16" height="13" x="4" y="8" rx="2"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M12 13v3"/><path d="M8 13h8"/></svg>
+        <span>Login with organization account</span>
+      </Button>
+
       {/* Divider */}
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
@@ -202,19 +212,6 @@ export function LoginForm({
           </Button>
         </form>
       </Form>
-      {/* Organization Login */}
-      {/* Organization Login */}
-      <div className="bg-gray-50 border dark:bg-background dark:border-accent border-gray-200 rounded-lg p-2 text-center text-sm">
-        <span className="text-muted-foreground">Part of an organization? </span>
-        <Button
-          variant="link"
-          onClick={onSwitchToOrgLogin}
-          className="text-foreground underline font-medium p-0"
-        >
-          Login with organization account
-        </Button>
-      </div>
-
       {/* Register Link */}
       <div className="text-center text-sm ">
         <span className="text-muted-foreground">

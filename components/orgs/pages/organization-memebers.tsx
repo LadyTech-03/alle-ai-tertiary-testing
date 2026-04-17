@@ -160,7 +160,7 @@ export default function OrganizationMembersPage() {
   };
   // delete members permanantly
   const handleDeleteMembers = async (data: any) => {
-    console.log(data);
+    // console.log(data);
     setActionType("delete");
     setActionMessage(
       `Are you sure you want to permanently delete ${data.length} member(s)?`

@@ -339,7 +339,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           throw new Error("No authentication token found");
         }
         setAuth(response.data.user, currentToken);
-        console.log("client verification success redirect here ");
+        // console.log("client verification success redirect here ");
         router.push("/plans");
         return;
       } else {

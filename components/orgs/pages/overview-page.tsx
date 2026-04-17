@@ -143,8 +143,8 @@ export default function OrgOverview() {
   const [isBillingModalOpen, setIsBillingModalOpen] = useState(false);
 
   // Determine subscription status based on nextBillingDate
-  const isSubscribed = !!nextBillingDate;
-  console.log(organizationDetails);
+  // const isSubscribed = !!nextBillingDate;
+  // console.log(organizationDetails);
   const seatInfo = organizationDetails?.seats_info || {};
   const memberInfo = organizationDetails?.user_status_info;
   const totalMembers = Object.values(memberInfo || {}).reduce(
@@ -446,7 +446,7 @@ export default function OrgOverview() {
                         ) && (
                           <TooltipContent>
                             <p>
-                              You don't have permission to update billing.
+                              You don&apos;t have permission to update billing.
                               Contact your administrator.
                             </p>
                           </TooltipContent>
@@ -514,7 +514,7 @@ export default function OrgOverview() {
                         ) && (
                           <TooltipContent>
                             <p>
-                              You don't have permission to update billing.
+                              You don&apos;t have permission to update billing.
                               Contact your administrator.
                             </p>
                           </TooltipContent>

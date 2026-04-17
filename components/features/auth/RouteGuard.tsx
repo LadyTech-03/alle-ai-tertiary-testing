@@ -97,7 +97,7 @@ function RouteGuardInner({ children }: RouteGuardProps) {
         try {
           const response = await authApi.getUser();
           // console.log(response, 'google auth response')
-          console.log("making api call inide route gaurd", response);
+          // console.log("making api call inide route gaurd", response);
 
           // console.log(response.data.user)
           setAuth(response.data.user, tokenFromUrl, response.plan);

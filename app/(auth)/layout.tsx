@@ -245,7 +245,7 @@ export default function AuthLayout({
           // console.log("Token exists, checking authentication...");
           const response = await authApi.getUser();
           // console.log("Auth check response:", response);
-          console.log("layout auth response", response);
+          // console.log("layout auth response", response);
           setAuth(response.data.user, token, response.plan);
           setOrganizationDetails(response.organisationDetails || null);
           const orgId = response.organisationDetails?.id;
