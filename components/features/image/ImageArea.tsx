@@ -127,7 +127,11 @@ const ImageArea = () => {
   
 
   const [generatedImages, setGeneratedImages] = useState<GeneratedImage[]>([]);
-  const [loadingModels, setLoadingModels] = useState<string[]>([]);
+  const [loadingModels, setLoadingModels] = useState<string[]>(() => {
+    if (generationType !== 'new') return [];
+    const { selectedModels, inactiveModels } = useSelectedModelsStore.getState();
+    return selectedModels.image.filter(id => !inactiveModels.includes(id));
+  });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoadingConversation, setIsLoadingConversation] = useState(false);
   const [retryingModels, setRetryingModels] = useState<string[]>([]);
@@ -223,6 +227,7 @@ const ImageArea = () => {
     };
 
     const handleInitialResponse = async () => {
+      console.log('conversationId:', conversationId, 'promptId:', promptId);
       if (!conversationId || !promptId) return;
       if(!isAuthenticated) return;
 
