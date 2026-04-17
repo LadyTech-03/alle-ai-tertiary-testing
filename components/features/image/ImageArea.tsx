@@ -225,6 +225,7 @@ const ImageArea = () => {
       if (!conversationId || !promptId) return;
       console.log('Handling initial response for conversation:', conversationId, 'and prompt:', promptId);
       if(isAuthenticated) return;
+      console.log('I am authenticated, proceeding with setting models and generating images');
 
       setConversationModels(selectedModels.image);
       setPreviousSelectedModels(selectedModels.image);
@@ -239,7 +240,7 @@ const ImageArea = () => {
       setGeneratedImages([]);
       setErrors({});
 
-      // console.log('About to start image generation for models:', activeModels);
+      console.log('About to start image generation for models:', activeModels);
       
       activeModels.forEach(modelId => {
         generateImage(modelId);
