@@ -702,6 +702,7 @@ const thinkingModels = ['deepseek-r1', 'o1', 'o3-mini', 'gemini-2-5-pro', 'grok-
     }
 
     // handleInitialResponse();
+    // removed currentGenerationType from dependancy array
   }, []);
 
 

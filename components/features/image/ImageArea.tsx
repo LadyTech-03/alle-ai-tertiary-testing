@@ -221,7 +221,9 @@ const ImageArea = () => {
     };
 
     const handleInitialResponse = async () => {
+      console.log('I got here and');
       if (!conversationId || !promptId) return;
+      console.log('Handling initial response for conversation:', conversationId, 'and prompt:', promptId);
       if(isAuthenticated) return;
 
       setConversationModels(selectedModels.image);
