@@ -38,7 +38,7 @@ export function GoogleButton() {
       variant="outline"
       onClick={handleGoogleSignIn}
       disabled={isLoading}
-      className="w-full flex items-center justify-center gap-2 border rounded-md py-2 px-4 transition-colors relative"
+      className="w-full flex items-center justify-center gap-2 rounded-md py-2 px-4 transition-all duration-200 bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 shadow-sm hover:shadow-md dark:bg-zinc-800/50 dark:hover:bg-zinc-700/60 dark:border-zinc-700 dark:text-zinc-300 relative"
     >
       {isLoading ? (
         <>

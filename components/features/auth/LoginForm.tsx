@@ -105,18 +105,18 @@ export function LoginForm({
       exit="exit"
       className="space-y-6"
     >
-      {/* Google Sign In */}
-      <GoogleButton />
-
-      {/* Organization Login */}
-      <Button
-        variant="outline"
-        onClick={onSwitchToOrgLogin}
-        className="w-full flex items-center justify-center gap-2 border rounded-md py-2 px-4 transition-colors"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="16" height="13" x="4" y="8" rx="2"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M12 13v3"/><path d="M8 13h8"/></svg>
-        <span>Login with organization account</span>
-      </Button>
+      {/* Social login group */}
+      <div className="space-y-2">
+        <GoogleButton />
+        <Button
+          variant="outline"
+          onClick={onSwitchToOrgLogin}
+          className="w-full flex items-center justify-center gap-2 rounded-md py-2 px-4 transition-all duration-200 bg-zinc-50 hover:bg-zinc-100 border-zinc-200 text-zinc-700 shadow-sm hover:shadow-md dark:bg-zinc-800/50 dark:hover:bg-zinc-700/60 dark:border-zinc-700 dark:text-zinc-300"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="16" height="13" x="4" y="8" rx="2"/><path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M12 13v3"/><path d="M8 13h8"/></svg>
+          <span>Login with organization account</span>
+        </Button>
+      </div>
 
       {/* Divider */}
       <div className="relative">
