@@ -184,7 +184,7 @@ const ImageArea = () => {
   useEffect(() => {
     const generateImage = async (modelId: string) => {
       if (!conversationId || !promptId) return;
-      if(isAuthenticated) return;
+      if(!isAuthenticated) return;
       
       try {
         const response = await chatApi.generateResponse({
