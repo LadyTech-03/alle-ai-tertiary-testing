@@ -882,6 +882,8 @@ const thinkingModels = ['deepseek-r1', 'o1', 'o3-mini', 'gemini-2-5-pro', 'grok-
     extractModelUidsFromSharedConversation(loadedConversation);
     const LoadedConversationContent = loadedConversation.content ?? loadedConversation; 
     // Filter out messages that have empty responses array
+
+    console.log(LoadedConversationContent, 'The loaded conversation content');
     const messagesWithResponses = LoadedConversationContent.filter((message: any) => 
       message.responses && Array.isArray(message.responses) && message.responses.length > 0
     );
