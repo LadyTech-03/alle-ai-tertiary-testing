@@ -348,9 +348,9 @@ const thinkingModels = ['deepseek-r1', 'o1', 'o3-mini', 'gemini-2-5-pro', 'grok-
   // Update the effect to handle initial responses
   useEffect(() => {
     const handleInitialResponse = async () => {
-      // console.log('I am here and this is my main function');
-      // console.log(conversationId, 'conversation id');
-      // console.log(promptId, 'prompt id');
+      console.log('I am here and this is my main function');
+      console.log(conversationId, 'conversation id');
+      console.log(promptId, 'prompt id');
       if (!conversationId || !promptId) {
         toast.error('No conversation found');
         // console.log('No conversation or prompt id found');
