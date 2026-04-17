@@ -635,7 +635,7 @@ const thinkingModels = ['deepseek-r1', 'o1', 'o3-mini', 'gemini-2-5-pro', 'grok-
         return;
       }
 
-      // console.log('Loading conversation:', loadConversationId, 'from route:', isProjectRoute ? 'project' : 'regular');
+      console.log('Loading conversation:', loadConversationId, 'from route:', isProjectRoute ? 'project' : 'regular');
       setConversationId(loadConversationId);     
       setIsLoadingConversation(true);
       if(isAuthenticated){
