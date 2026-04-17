@@ -695,14 +695,14 @@ const thinkingModels = ['deepseek-r1', 'o1', 'o3-mini', 'gemini-2-5-pro', 'grok-
     };
 
     // console.log('Main effect - currentGenerationType:', currentGenerationType);
-    // if (currentGenerationType === 'new') {
+    if (currentGenerationType === 'new') {
       handleInitialResponse();
-    // } else if (currentGenerationType === 'load' || currentGenerationType === 'share') {
-      // loadConversation();
-    // }
+    } else if (currentGenerationType === 'load' || currentGenerationType === 'share') {
+      loadConversation();
+    }
 
     // handleInitialResponse();
-  }, [currentGenerationType]);
+  }, []);
 
 
   const isPlanCheckReady = (user !== null && plan !== undefined && chatModels.length > 0 && selectedModels.chat.length > 0) || currentGenerationType === 'share';
