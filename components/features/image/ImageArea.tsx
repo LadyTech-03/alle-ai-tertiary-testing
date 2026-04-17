@@ -163,6 +163,7 @@ const ImageArea = () => {
   const initialPrompt = content.image.input
   const { selectedModels, inactiveModels, setTempSelectedModels, saveSelectedModels, setLoadingLatest } = useSelectedModelsStore();
   const { conversationId, promptId, generationType, setConversationId } = useConversationStore();
+  const initialGenerationType = useRef(generationType);
   const { imageModels } = useModelsStore();
   const { user, plan, isAuthenticated } = useAuthStore();
   const router = useRouter();
@@ -740,7 +741,7 @@ const handleDownload = async (imageUrl: string, modelName: string) => {
         )}
 
         <div className="mt-4 grid grid-cols-2 max-[700px]:grid-cols-1 gap-y-4 lg:gap-x-6 justify-items-center">
-          {generationType === 'new' ? (
+          {initialGenerationType.current === 'new' ? (
             // For new generations, use selectedModels filter
             selectedModels.image
               .filter(modelId => !inactiveModels.includes(modelId))
