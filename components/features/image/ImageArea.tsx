@@ -661,7 +661,8 @@ const handleDownload = async (imageUrl: string, modelName: string) => {
 
   const ImageSkeleton = ({ modelId }: { modelId: string }) => {
     const modelInfo = getModelInfo(modelId);
-    // console.log('modelInfo', modelInfo);
+    console.log('modelInfo', modelInfo);
+    console.log('modelId in skeleton', modelId);
 
     return (
       <div className="relative w-80 h-80 lg:w-96 lg:h-96">
@@ -687,7 +688,14 @@ const handleDownload = async (imageUrl: string, modelName: string) => {
           )}
         </div>
 
-        <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-lg bg-muted animate-pulse" />
+        <AntdSkeleton.Image 
+          active={true} 
+          className="!w-full !h-full !aspect-square"
+          style={{
+            width: '100%',
+            height: '100%',
+          }}
+        />
 
         <div className="absolute bottom-0 left-0 right-0 p-4">
           <div className="flex justify-end gap-3">
