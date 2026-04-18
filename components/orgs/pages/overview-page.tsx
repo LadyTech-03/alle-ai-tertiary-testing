@@ -47,12 +47,7 @@ import { LiveUsersMonitoring } from "../LiveUsersMonitoring";
 import { useRouter } from "next/navigation";
 import { getOrganizationViewMode } from "@/lib/org-utils";
 export default function OrgOverview() {
-  const channelsData = [
-    { source: "GPT-4", visitors: "4.7K" },
-    { source: "Claude-3", visitors: "3.4K" },
-    { source: "Gemini", visitors: "2.9K" },
-    { source: "Llama-2", visitors: "1.5K" },
-  ];
+
   const { organizationDetails } = useAuthStore();
   const router = useRouter();
   // Date range state for analytics
@@ -132,18 +127,11 @@ export default function OrgOverview() {
   const { data: previewData, isLoading: isPreviewLoading } = useOrgPreview();
   const topModels = previewData?.top_models || [];
 
-  const pagesData = [
-    { source: "alle-ai.com/chat", pageviews: "4.7K" },
-    { source: "alle-ai.com/image", pageviews: "3.4K" },
-    { source: "alle-ai.com/audio", pageviews: "2.9K" },
-    { source: "alle-ai.com/video", pageviews: "1.5K" },
-  ];
-
   const { nextBillingDate, nextBillingMessage } = useOrgPaymentStore();
   const [isBillingModalOpen, setIsBillingModalOpen] = useState(false);
 
   // Determine subscription status based on nextBillingDate
-  // const isSubscribed = !!nextBillingDate;
+  const isSubscribed = !!nextBillingDate;
   // console.log(organizationDetails);
   const seatInfo = organizationDetails?.seats_info || {};
   const memberInfo = organizationDetails?.user_status_info;

@@ -128,11 +128,7 @@ export default function OrgBillings() {
   // Calculate pricing for all seat types found in seats_info
   const pricing = Object.keys(seatsMap).reduce((acc, key) => {
     // Default fallback pricing logic logic if needed (e.g. device vs human)
-    const defaultPrice = key.includes("device")
-      ? 50
-      : key === "student"
-      ? 80
-      : 100;
+    const defaultPrice = key.includes("device") ? 0 : key === "student" ? 0 : 0;
     return {
       ...acc,
       [key]: getPrice(key, defaultPrice),

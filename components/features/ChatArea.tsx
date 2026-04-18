@@ -711,7 +711,9 @@ const thinkingModels = ['deepseek-r1', 'o1', 'o3-mini', 'gemini-2-5-pro', 'grok-
   useEffect(()=>{
 
     if(!isAuthenticated || !token) return;
-    const userPlan = plan?.split('_')[0] || "free";
+    const isEduPlan = typeof plan === 'string' && plan.includes('edu');
+    // const isCustomPlan = typeof plan === 'string' && plan.includes('custom');
+    const userPlan = isEduPlan ? 'plus' : (plan?.split('_')[0] || "free");
 
       // Get selected model objects
       const selectedModelObjs = selectedModels.chat
