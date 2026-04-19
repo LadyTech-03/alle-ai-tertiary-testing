@@ -29,17 +29,7 @@ const orgLoginSchema = z.object({
       (email) => {
         const domain = email.split("@")[1]?.toLowerCase();
         const consumerDomains = [
-          "gmail.com",
-          "yahoo.com",
-          "hotmail.com",
-          "outlook.com",
-          "icloud.com",
-          "aol.com",
-          "mail.com",
-          "protonmail.com",
-          "live.com",
-          "msn.com",
-          "yandex.com",
+          "test.com",
         ];
         return !consumerDomains.includes(domain);
       },
