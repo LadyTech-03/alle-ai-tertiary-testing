@@ -218,8 +218,9 @@ export function VerificationCodeForm({
     try {
       const formattedCode =
         loginType === "org" ? verificationCode : `A-${verificationCode}`;
-      await verifyEmail(formattedCode, loginType, email);
+      const response = await verifyEmail(formattedCode, loginType, email);
       toast.success("Email verified");
+      console.log("Verification response:", response);
       onSuccess();
       
     } catch (error: any) {
