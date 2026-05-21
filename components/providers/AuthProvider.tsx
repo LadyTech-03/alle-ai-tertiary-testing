@@ -340,7 +340,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
         setAuth(response.data.user, currentToken);
         console.log("client verification success redirect here: ", response);
-        // router.push("/plans");
+        router.push("/");
         return;
       } else {
         throw new Error(response.message || "Invalid verification code");

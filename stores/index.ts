@@ -1065,7 +1065,7 @@ export const useAuthStore = create<AuthStore>()(
           const response = await authApi.getUser();
           // Persist latest user and plan if provided
 
-          console.log("User Plan is ", response.plan);
+          // console.log("User Plan is ", response.plan);
 
           if (response?.data?.user) {
             set({
